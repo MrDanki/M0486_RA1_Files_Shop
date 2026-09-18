@@ -31,9 +31,6 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 	private JButton btnAddStock;
 	private JButton btnRemoveProduct;
 	
-	
-	
-
 	public Shop getShop() {
 		return shop;
 	}

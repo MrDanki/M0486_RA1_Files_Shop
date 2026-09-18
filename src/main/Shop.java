@@ -197,21 +197,15 @@ public class Shop {
 				
 	}
 
-	/**
-	 * load initial inventory to shop
-	 */
 	public void loadInventory() {
-//		addProduct(new Product("Manzana", new Amount(10.00), true, 10));
-//		addProduct(new Product("Pera", new Amount(20.00), true, 20));
-//		addProduct(new Product("Hamburguesa", new Amount(30.00), true, 30));
-//		addProduct(new Product("Fresa", new Amount(5.00), true, 20));
+		//addProduct(new Product("Manzana", new Amount(10.00), true, 10));
+		//addProduct(new Product("Pera", new Amount(20.00), true, 20));
+		//addProduct(new Product("Hamburguesa", new Amount(30.00), true, 30));
+		//addProduct(new Product("Fresa", new Amount(5.00), true, 20));
 		// now read from file
 		this.readInventory();
 	}
 
-	/**
-	 * read inventory from file
-	 */
 	private void readInventory() {
 		// locate file, path and name
 		File f = new File(System.getProperty("user.dir") + File.separator + "files/inputInventory.txt");
@@ -278,16 +272,10 @@ public class Shop {
 		}
 	}
 
-	/**
-	 * show current total cash
-	 */
 	private void showCash() {
 		System.out.println("Dinero actual: " + cash);
 	}
 
-	/**
-	 * add a new product to inventory getting data from console
-	 */
 	public void addProduct() {
 		if (isInventoryFull()) {
 			System.out.println("No se pueden añadir más productos");
@@ -304,9 +292,6 @@ public class Shop {
 		addProduct(new Product(name, new Amount(wholesalerPrice), true, stock));
 	}
 
-	/**
-	 * remove a new product to inventory getting data from console
-	 */
 	public void removeProduct() {
 		if (inventory.size() == 0) {
 			System.out.println("No se pueden eliminar productos, inventario vacio");
@@ -330,9 +315,6 @@ public class Shop {
 		}
 	}
 
-	/**
-	 * add stock for a specific product
-	 */
 	public void addStock() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Seleccione un nombre de producto: ");
@@ -352,9 +334,6 @@ public class Shop {
 		}
 	}
 
-	/**
-	 * set a product as expired
-	 */
 	private void setExpired() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Seleccione un nombre de producto: ");
@@ -368,9 +347,6 @@ public class Shop {
 		}
 	}
 
-	/**
-	 * show all inventory
-	 */
 	public void showInventory() {
 		System.out.println("Contenido actual de la tienda:");
 		for (Product product : inventory) {
@@ -380,9 +356,6 @@ public class Shop {
 		}
 	}
 
-	/**
-	 * make a sale of products to a client
-	 */
 	public void sale() {
 		// ask for client name
 		Scanner sc = new Scanner(System.in);
@@ -426,28 +399,18 @@ public class Shop {
 		}
 
 		totalAmount.setValue(totalAmount.getValue() * TAX_RATE);
-		// show cost total
 		System.out.println("Venta realizada con éxito, total: " + totalAmount);
 		
-		// make payment
 		if(!client.pay(totalAmount)) {
 			System.out.println("Cliente debe: " + client.getBalance());;
 		}
-
-		// create sale
 		Sale sale = new Sale(client, shoppingCart, totalAmount);
-
-		// add to shop
 		sales.add(sale);
-//		numberSales++;
+                //numberSales++;
 
-		// add to cash
 		cash.setValue(cash.getValue() + totalAmount.getValue());
 	}
 
-	/**
-	 * show all sales
-	 */
 	private void showSales() {
 		System.out.println("Lista de ventas:");
 		for (Sale sale : sales) {
@@ -455,8 +418,7 @@ public class Shop {
 				System.out.println(sale);
 			}
 		}
-		
-		// ask for client name
+
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Exportar fichero ventas? S / N");
 		String option = sc.nextLine();
@@ -466,9 +428,6 @@ public class Shop {
 		
 	}
 
-	/**
-	 * write in file the sales done
-	 */
 	private void writeSales() {
 		// define file name based on date
 		LocalDate myObj = LocalDate.now();
@@ -518,9 +477,6 @@ public class Shop {
 		}		
 	}
 
-	/**
-	 * show total amount all sales
-	 */
 	private void showSalesAmount() {
 		Amount totalAmount = new Amount(0.0);
 		for (Sale sale : sales) {
@@ -532,11 +488,6 @@ public class Shop {
 		System.out.println(totalAmount);
 	}
 
-	/**
-	 * add a product to inventory
-	 * 
-	 * @param product
-	 */
 	public void addProduct(Product product) {
 		if (isInventoryFull()) {
 			System.out.println("No se pueden añadir más productos, se ha alcanzado el máximo de " + inventory.size());
@@ -545,29 +496,15 @@ public class Shop {
 		inventory.add(product);
 		numberProducts++;
 	}
-	
-	
 
-	/**
-	 * check if inventory is full or not
-	 */
 	public boolean isInventoryFull() {
-		if (numberProducts == 10) {
-			return true;
-		} else {
-			return false;
-		}
-
+		if(numberProducts == 10){return true;}
+                else{return false;}
 	}
-
-	/**
-	 * find product by name
-	 * 
-	 * @param product name
-	 */
+        
 	public Product findProduct(String name) {
 		for (int i = 0; i < inventory.size(); i++) {
-			if (inventory.get(i) != null && inventory.get(i).getName().equalsIgnoreCase(name)) {
+                    if (inventory.get(i) != null && inventory.get(i).getName().equalsIgnoreCase(name)) {
 				return inventory.get(i);
 			}
 		}
