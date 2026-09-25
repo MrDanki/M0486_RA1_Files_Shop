@@ -19,10 +19,8 @@ import java.util.Scanner;
 
 public class Shop {
 	private Amount cash = new Amount(100.00);
-//	private Product[] inventory;
 	private ArrayList<Product> inventory;
 	private int numberProducts;
-//	private Sale[] sales;
 	private ArrayList<Sale> sales;
 	private int numberSales;
 
@@ -33,67 +31,45 @@ public class Shop {
 		sales = new ArrayList<Sale>();
 	}
 	
-	
-
 	public Amount getCash() {
 		return cash;
 	}
-
-
 
 	public void setCash(Amount cash) {
 		this.cash = cash;
 	}
 
-
-
 	public ArrayList<Product> getInventory() {
 		return inventory;
 	}
-
-
 
 	public void setInventory(ArrayList<Product> inventory) {
 		this.inventory = inventory;
 	}
 
-
-
 	public int getNumberProducts() {
 		return numberProducts;
 	}
-
-
 
 	public void setNumberProducts(int numberProducts) {
 		this.numberProducts = numberProducts;
 	}
 
-
-
 	public ArrayList<Sale> getSales() {
 		return sales;
 	}
-
-
 
 	public void setSales(ArrayList<Sale> sales) {
 		this.sales = sales;
 	}
 
-
-
 	public int getNumberSales() {
 		return numberSales;
 	}
 
-
-
 	public void setNumberSales(int numberSales) {
 		this.numberSales = numberSales;
 	}
-
-
 
 	public static void main(String[] args) {
 		Shop shop = new Shop();
