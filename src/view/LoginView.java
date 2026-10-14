@@ -3,6 +3,7 @@ package view;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -80,7 +81,7 @@ public class LoginView extends JFrame implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e){
 		if (e.getSource() == btnLogin) {
 			// in case clicks button
 			String employeeId = textFieldEmployeeId.getText();
@@ -100,12 +101,15 @@ public class LoginView extends JFrame implements ActionListener{
 					}
 					if (logged) {
 						// redirect to shop window
-						ShopView shop = new ShopView();
-						shop.setExtendedState(NORMAL);
-						shop.setVisible(true);
-						
-						// release current screen
-						dispose();					
+						try{
+							ShopView shop = new ShopView();
+							shop.setExtendedState(NORMAL);
+							shop.setVisible(true);
+							
+							// release current screen
+							dispose();
+						} catch (IOException e1) {}
+											
 						
 					} else {
 						counterErrorLogin++;

@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class ShopView extends JFrame implements ActionListener, KeyListener{
@@ -60,7 +61,7 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 	/**
 	 * Create the frame.
 	 */
-	public ShopView() {
+	public ShopView() throws IOException {
 		setTitle("MiTenda.com - Menu principal");
 		// listen key
 		addKeyListener(this);
@@ -136,7 +137,11 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 		btnShowInventory.setBounds(99, 290, 236, 40);
 		contentPane.add(btnShowInventory);
 		// listen button
-		btnShowInventory.addActionListener(this);
+		btnShowInventory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				printInventory();
+			}
+		});
 	}
 
 	@Override
@@ -160,6 +165,13 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 			this.openProductView(Constants.OPTION_REMOVE_PRODUCT);
 		}
 		
+	}
+
+	public void printInventory() {
+		System.out.println("Inventory:");
+		for (int i = 0; i < shop.getInventory().size(); i++) {
+			System.out.println(shop.getInventory().get(i).toString());
+		}
 	}
 
 	@Override
