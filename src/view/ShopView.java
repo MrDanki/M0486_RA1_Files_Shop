@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import dao.DaoImpFile;
 import main.Shop;
 import utils.Constants;
 
@@ -93,6 +94,17 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 		contentPane.add(btnExportInventory);
 		// listen button
 		btnExportInventory.addActionListener(this);
+		btnExportInventory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				DaoImpFile dao = new DaoImpFile();
+				try {
+					dao.writeInventory(shop.getInventory());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 
 		// option count cash
 		btnShowCash = new JButton("1. Contar caja");

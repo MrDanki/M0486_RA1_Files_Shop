@@ -3,8 +3,11 @@ package dao;
 import java.io.File;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 
 import model.Amount;
@@ -81,7 +84,24 @@ public class DaoImpFile implements Dao {
 		}
     }
     
-    public void writeInventory(ArrayList<Product> inventory)throws IOException {
-    	
-    }
+    public void writeInventory(ArrayList<Product> inventory) throws IOException {
+		// Nombre: inventory_yyyy-MM-dd.txt dentro de la carpeta "files"
+		String fileName = "inventory_" + LocalDate.now() + ".txt"; // LocalDate.now() ya da yyyy-MM-dd
+		File folder = new File(System.getProperty("user.dir") + File.separator + "files");
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+		File f = new File(folder, fileName);
+
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))) {
+			int id = 1;
+			for (Product product : inventory) {
+				bw.write(id + ";Product:" + product.getName() + ";Stock:" + product.getStock() + ";");
+				bw.newLine();
+				id++;
+			}
+			bw.write("Total number of products:" + inventory.size() + ";");
+			bw.newLine();
+		}
+	}
 }
