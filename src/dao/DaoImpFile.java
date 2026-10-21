@@ -84,7 +84,7 @@ public class DaoImpFile implements Dao {
 		}
     }
     
-    public void writeInventory(ArrayList<Product> inventory) throws IOException {
+    public boolean writeInventory(ArrayList<Product> inventory) throws IOException {
 		// Nombre: inventory_yyyy-MM-dd.txt dentro de la carpeta "files"
 		String fileName = "inventory_" + LocalDate.now() + ".txt"; // LocalDate.now() ya da yyyy-MM-dd
 		File folder = new File(System.getProperty("user.dir") + File.separator + "files");
@@ -102,6 +102,9 @@ public class DaoImpFile implements Dao {
 			}
 			bw.write("Total number of products:" + inventory.size() + ";");
 			bw.newLine();
-		}
+			return true;
+		} 
+		catch (FileNotFoundException e){return false;} 
+		catch (IOException e){return false;}
 	}
 }
