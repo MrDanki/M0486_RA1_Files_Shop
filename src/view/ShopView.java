@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JOptionPane;
 
 import dao.DaoImpFile;
 import main.Shop;
@@ -98,7 +99,22 @@ public class ShopView extends JFrame implements ActionListener, KeyListener{
 			public void actionPerformed(ActionEvent e){
 				DaoImpFile dao = new DaoImpFile();
 				try {
-					dao.writeInventory(shop.getInventory());
+					if(dao.writeInventory(shop.getInventory())){
+						JOptionPane.showMessageDialog(
+							null,
+							"Inventario exportado correctamente",
+							"Informacion",
+							JOptionPane.INFORMATION_MESSAGE
+						);
+					}
+					else{
+						JOptionPane.showMessageDialog(
+							null,
+							"Error exportando el inventario",
+							"Error",
+							JOptionPane.ERROR_MESSAGE
+						);
+					}
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
